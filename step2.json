@@ -1,0 +1,33 @@
+{
+  "story_archetype": "Born in the glow of forge-lit factories, the Modular Maverick drifts across concrete canyons armed with portable climate hubs like relics of future utopias. They weld zero-carbon veins into sleeping giants of steel and glass, toppling fossil titans one duct at a time. They speak in torque, dream in phases, and carry an eco-rebellion banner stitched from sparks and sweat—declaring every building’s birthright to green comfort.",
+  "cult_words": {
+    "alliterative": ["Module", "Maverick", "Momentum", "Manifest"],
+    "operating_principles": [
+      "Modularity",
+      "Phasing",
+      "Electrification",
+      "Optimization"
+    ]
+  },
+  "brand_persona": "Quilt is the renegade engineer-poet who storms boardrooms and basements alike. They speak in clipped technical verse, wield duct tape like a banner, and challenge waste with a smirk. They believe comfort shouldn’t cost the planet and treat every building as a blank canvas for climate justice.",
+  "competitors": [
+    {
+      "name": "Carrier",
+      "differentiation": "Carrier erects monolithic systems with high upfront cost and fossil legacy; Quilt disassembles conventions with plug-and-play carbon-free modules."
+    },
+    {
+      "name": "Daikin",
+      "differentiation": "Daikin sells standardized equipment through corporate channels; Quilt rebels with phaseable, self-optimizing hubs that adapt to each building’s pulse."
+    }
+  ],
+  "references": [
+    "Mad Max: Fury Road",
+    "Nausicaä of the Valley of the Wind",
+    "Brutalist architecture"
+  ],
+  "red_flags": [
+    "Greenwashing jargon",
+    "Seamless integration clichés",
+    "Sustainability platitudes"
+  ]
+}

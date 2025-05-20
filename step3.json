@@ -1,0 +1,122 @@
+{
+  "brand_directions": [
+    {
+      "description": "A living habitat that breathes like an organism, powered by real-time analytics and modular heat pumps that adapt and refine comfort in biotic harmony. Walls pulse with data-driven respiration, turning each room into a regenerative membrane that filters and cycles energy. This world champions electrification as an act of symbiosis between home and planet.",
+      "core_words": [
+        "respiration",
+        "network",
+        "membrane",
+        "pulse",
+        "evolution",
+        "harmony",
+        "scaffolding"
+      ],
+      "direction_tag": "Default"
+    },
+    {
+      "description": "Comfort distilled to a sacred ritual: every watt measured, every breath refined in silent ceremonies of modular assembly. Homes become minimalist temples where adaptive controls perform daily rites to honor electrification and eliminate waste. This world rejects spectacle in favor of meditative precision.",
+      "core_words": [
+        "silence",
+        "purity",
+        "ember",
+        "ceremony",
+        "cycle",
+        "breathe"
+      ],
+      "direction_tag": "Default"
+    },
+    {
+      "description": "Inspired by biomimicry philosophy, houses mutate and adapt through algorithmic controls and plug-and-play heat modules, refining each cycle toward ecological fitness. Every upgrade feels like a genetic spore spreading through walls, evolving comfort without carbon. This world treats HVAC as living code.",
+      "core_words": [
+        "genome",
+        "adaptation",
+        "spore",
+        "lineage",
+        "echo",
+        "mutation"
+      ],
+      "direction_tag": "Default"
+    },
+    {
+      "description": "An underground hacktivist network uses data insights as a blade to sever wasteful heat cycles and liberate energy for the many. Clandestine code-cutters rewire modular units into insurgent tools, turning every thermostat into a weapon against carbon crime. This world glorifies subversion over compliance.",
+      "core_words": [
+        "sabotage",
+        "stealth",
+        "cipher",
+        "revolt",
+        "breach",
+        "insurgency"
+      ],
+      "direction_tag": "Controversial"
+    },
+    {
+      "description": "Frontline cells deploy portable heat pumps like guerrilla squads, breaching fossil fuel strongholds with electrified modular strike teams. Siege tactics become domestic rituals as homes convert into hotbeds of resistance. This world frames comfort as a battlefield and every sinew of data as ammunition.",
+      "core_words": [
+        "siege",
+        "guerrilla",
+        "arsenal",
+        "ember",
+        "trench",
+        "breakthrough"
+      ],
+      "direction_tag": "Controversial"
+    },
+    {
+      "description": "A silent legion of modular units self-installs behind the scenes, refining indoor climates and defying waste without fanfare. The revolution whispers through adaptive controls that quietly unseat furnaces, one home at a time. This world prizes stealthy transformation over grand gestures.",
+      "core_words": [
+        "whisper",
+        "undercurrent",
+        "revolt",
+        "flux",
+        "fracture",
+        "stealth",
+        "rekindle"
+      ],
+      "direction_tag": "Controversial"
+    },
+    {
+      "description": "Gritty industrial salvage meets high-tech precision in a punked-out climate rebellion. Salvaged modules are hacked and rewired into neon-glow rigs, modularized for maximum adaptability. This world celebrates creative vandalism as the path to radical electrification.",
+      "core_words": [
+        "rust",
+        "neon",
+        "fuse",
+        "repurpose",
+        "grit",
+        "coil",
+        "revolt"
+      ],
+      "direction_tag": "Controversial"
+    },
+    {
+      "description": "A glass-and-steel cathedral of live dashboards and adaptive controls where data is worshipped as divine code. Pilgrims of precision gather to peer into real-time analytics altars, seeking electrified salvation through modular upgrades. This world sacralizes measurement over myth.",
+      "core_words": ["altar", "ritual", "archive", "pulse", "sanctum", "echo"],
+      "direction_tag": "Cultural Tension"
+    },
+    {
+      "description": "Homes recast as strategic pawns in an electrified geopolitical chessboard, leveraging modular storage and adaptive HVAC to seize grid influence. Comfort becomes a fixture of power play, each kilowatt traded like a treaty. This world exposes climate action as high-stakes diplomacy.",
+      "core_words": [
+        "grid",
+        "leverage",
+        "treaty",
+        "current",
+        "balance",
+        "stake",
+        "frontier"
+      ],
+      "direction_tag": "Cultural Tension"
+    },
+    {
+      "description": "A hyper-optimized climate machine collapses all variables into algorithmic vectors, refining temperature with surgical accuracy. Every thermal decision is predestined by code, erasing human error in pursuit of peak efficiency. This world interrogates the line between machine mastery and cold calculation.",
+      "core_words": [
+        "sequence",
+        "vector",
+        "axis",
+        "fractal",
+        "pulse",
+        "incision",
+        "threshold"
+      ],
+      "direction_tag": "Cultural Tension"
+    }
+  ]
+}

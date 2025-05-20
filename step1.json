@@ -1,0 +1,103 @@
+{
+  "brand_summary": "Quilt operates in the sustainable HVAC industry, delivering modular, energy-efficient heating and cooling systems that harness renewable power and circular materials to slash carbon footprints and lower utility costs. We serve eco-conscious homeowners, architects, developers and facility managers who demand healthy, cost-effective indoor climates. Tone Tags: Sustainable Precision, Warm Intelligence. Cultural Space: Climate-positive living, smart home ecosystems and energy democracy.",
+  "business_core_ideas": {
+    "primary_ideas": [
+      {
+        "micro_core_idea": "ModularDesign→ScalableComfort",
+        "expanded_core_idea": "Quilt’s modular architecture lets homes grow or shrink HVAC capacity on demand."
+      },
+      {
+        "micro_core_idea": "SmartSensors→OptimizedEfficiency",
+        "expanded_core_idea": "Real-time data from integrated sensors continuously tunes performance to save energy."
+      },
+      {
+        "micro_core_idea": "RenewablePower+HVAC→ZeroCarbonHomes",
+        "expanded_core_idea": "By pairing solar and storage with climate control, Quilt eliminates home emissions."
+      },
+      {
+        "micro_core_idea": "CircularMaterials→ZeroWasteUnits",
+        "expanded_core_idea": "Every component is designed for reuse, driving waste out of the HVAC lifecycle."
+      }
+    ],
+    "controversial_ideas": [
+      {
+        "micro_core_idea": "PremiumPrice→UltimateSustainability",
+        "expanded_core_idea": "High upfront cost funds superior eco-materials and guarantees unmatched longevity."
+      },
+      {
+        "micro_core_idea": "PlannedObsolescence→ContinuousInnovation",
+        "expanded_core_idea": "Time-limited modules force biannual upgrades, accelerating R&D and reducing legacy waste."
+      }
+    ]
+  },
+  "why_how_what_statements": {
+    "primary_sets": [
+      {
+        "why": "Because every breath deserves pure, planetary-friendly air",
+        "how": "We integrate energy-smart, zero-carbon components",
+        "what": "We install modular, sustainable HVAC solutions"
+      },
+      {
+        "why": "Because comfort should not cost the earth",
+        "how": "By optimizing resources with AI-driven controls",
+        "what": "We offer recyclable, net-zero heating and cooling"
+      },
+      {
+        "why": "To champion climate-friendly indoor living spaces",
+        "how": "Through circular design and renewable power",
+        "what": "We engineer carbon-neutral HVAC platforms"
+      },
+      {
+        "why": "Because homes deserve intelligent, eco-conscious climates",
+        "how": "By connecting sensors and sustainable materials",
+        "what": "We create adaptive green HVAC systems"
+      }
+    ],
+    "controversial_sets": [
+      {
+        "why": "Because less technology means more air purity",
+        "how": "By eliminating complex parts prone to pollution",
+        "what": "We deliver minimalist, passive HVAC systems"
+      },
+      {
+        "why": "Because warmth should be earned, not given",
+        "how": "We meter comfort by renewable credits",
+        "what": "We operate subscription-based carbon-bank climate units"
+      }
+    ]
+  },
+  "problem_solution_sets": {
+    "primary_sets": [
+      {
+        "problem": "Homes waste energy on fixed, inefficient climates",
+        "solution": "Quilt adapts heat and cool to real-time needs"
+      },
+      {
+        "problem": "Traditional HVAC traps homeowners in high utility bills",
+        "solution": "Quilt’s predictive AI slashes costs and emissions"
+      },
+      {
+        "problem": "Brick walls leak comfort and pollute outdoors",
+        "solution": "Quilt seals and sustains pure indoor atmosphere"
+      },
+      {
+        "problem": "Building codes lag behind climate urgency",
+        "solution": "Quilt’s modular upgrades outpace regulation"
+      }
+    ],
+    "controversial_sets": [
+      {
+        "problem": "HVAC companies profit from keeping systems broken",
+        "solution": "Quilt designs unbreakable units to end service traps"
+      },
+      {
+        "problem": "Carbon footprints hide behind efficiency labels",
+        "solution": "Quilt audits real emissions and publishes open data"
+      }
+    ]
+  },
+  "tone_options": {
+    "primary_tones": ["Sustainable Precision", "Warm Intelligence"],
+    "controversial_tones": ["Eco Anarchy", "Carbon Puritan"]
+  }
+}

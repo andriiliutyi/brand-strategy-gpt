@@ -1,0 +1,56 @@
+{
+  "strategic_style": [
+    {
+      "name": "Respire",
+      "note": "Breathing climate membrane",
+      "status": "Clean"
+    },
+    {
+      "name": "Membrane",
+      "note": "Filter-like adaptive barrier",
+      "status": "Possibly In Use"
+    },
+    { "name": "FluxLine", "note": "Dynamic heat network", "status": "Clean" },
+    {
+      "name": "EchoTherm",
+      "note": "Reflective data-driven heat",
+      "status": "Clean"
+    }
+  ],
+  "special_wrongness_style": [
+    { "name": "Glint", "note": "Quiet flicker of revolt", "status": "Clean" },
+    { "name": "Fissure", "note": "Opening in waste cycles", "status": "Clean" },
+    {
+      "name": "Undercut",
+      "note": "Subversive energy breach",
+      "status": "Clean"
+    },
+    {
+      "name": "Spore",
+      "note": "Mutating comfort catalyst",
+      "status": "Possibly In Use"
+    }
+  ],
+  "best_namer_method": [
+    {
+      "name": "Pulsecraft",
+      "note": "Artisanal data-driven warmth",
+      "status": "Clean"
+    },
+    {
+      "name": "VeilFlow",
+      "note": "Stealthy thermal currents",
+      "status": "Clean"
+    },
+    {
+      "name": "EchoHalo",
+      "note": "Sacred circuits of heat",
+      "status": "Clean"
+    },
+    {
+      "name": "ScionGrid",
+      "note": "Lineage of power networks",
+      "status": "Clean"
+    }
+  ]
+}
