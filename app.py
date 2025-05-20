@@ -285,7 +285,7 @@ if st.session_state.step == 3:
         # st.experimental_rerun()
 
 # ----------- STEP 4-----------
-if True or st.session_state.step == 4:
+if st.session_state.step == 4:
     st.header("Step 4: Select Brand Directions")
     try:
         data = json.loads(st.session_state.step_outputs["step_3"])
@@ -325,7 +325,7 @@ if True or st.session_state.step == 4:
             "content": st.session_state.step_inputs["step_4_context"]
         })
         step_4_output = generate_step_output(st.session_state.messages)
-        
+        st.session_state.step_outputs["step_4"] = step_4_output
         st.session_state.messages.append({
             "role": "assistant",
             "content": step_4_output
@@ -338,4 +338,106 @@ if True or st.session_state.step == 4:
         st.session_state.selections.pop("step_3", None)
         st.session_state.step_outputs.pop("step_3", None)
         st.session_state.step = 4
+        # st.experimental_rerun()
+        
+        
+# ----------- STEP 5 -----------
+if st.session_state.step == 5:
+    st.header("Step 5: Select Company Names")
+    try:
+        data = json.loads(st.session_state.step_outputs["step_4"])  # Output from Prompt 4
+    except Exception as e:
+        st.error(f"Could not parse output as JSON: {e}")
+        st.text_area("Raw Output", value=st.session_state.step_outputs["step_4"])
+        st.stop()
+
+    st.markdown("#### Review the candidate company names from each naming style below. Select your favorite(s) to continue.")
+
+    selected_names = {"strategic_style": [], "special_wrongness_style": [], "best_namer_method": []}
+
+    for style_key, style_label in [
+        ("strategic_style", "Strategic Style"),
+        ("special_wrongness_style", "Special Wrongness Style"),
+        ("best_namer_method", "Best Namer Method"),
+    ]:
+        st.subheader(style_label)
+        for i, item in enumerate(data[style_key]):
+            display_text = f"**{item['name']}**"
+            if item.get("note"):
+                display_text += f"  \n_Note: {item['note']}_"
+            if item.get("status") and item["status"] != "Clean":
+                display_text += f"  \n⚠️ *Status: {item['status']}*"
+            else:
+                display_text += f"  \n*Status: {item['status']}*"
+            checked = st.checkbox(display_text, key=f"{style_key}_{i}")
+            if checked:
+                selected_names[style_key].append(item)
+
+    if st.button("Next", key="go_to_step_6"):
+        # Optionally enforce at least one selection per style or overall
+        total_selected = sum(len(v) for v in selected_names.values())
+        if total_selected == 0:
+            st.warning("Please select at least one company name to continue!")
+            st.stop()
+        st.session_state.selections["step_5"] = selected_names
+        st.session_state.step_inputs["step_5_context"] = f"""
+            FOUNDATION PREFACE
+            Use the following strategic selections from previous stages as non-negotiable foundations for all outputs. Every line should reflect and extend the logic, tone, and cultural position of this core strategy.
+            {st.session_state.selections["step_5"]}
+            Please ensure all responses in this prompt reflect and extend this foundation. Reject generic startup speak. Match the tone and strategic specificity of the Brand Inputs Master.
+            {step_5_master_prompt}
+        """
+        st.session_state.messages.append({
+            "role": "user",
+            "content": st.session_state.step_inputs["step_5_context"]
+        })
+        step_5_output = generate_step_output(st.session_state.messages)
+        st.session_state.step_outputs["step_5"] = step_5_output
+        st.session_state.messages.append({
+            "role": "assistant",
+            "content": step_5_output
+        })
+        print("================== result 5 ====================")
+        print(step_5_output)
+        st.session_state.step += 1
+    if st.button("Redo", key="redo_step_5_selections"):
+        st.session_state.selections.pop("step_4", None)
+        st.session_state.step_outputs.pop("step_4", None)
+        st.session_state.step = 5
+
+# ----------- STEP 6 -----------
+if st.session_state.step == 6:
+    st.header("Step 6: Review Creative Copy for Selected Directions")
+    try:
+        data = json.loads(st.session_state.step_outputs["step_5"])  # step_5 output is from the prompt 6
+    except Exception as e:
+        st.error(f"Could not parse output as JSON: {e}")
+        st.text_area("Raw Output", value=st.session_state.step_outputs["step_5"])
+        st.stop()
+
+    direction_copies = data["direction_copies"]
+    st.markdown("#### Review the creative copy explorations for each direction you selected.")
+
+    for i, copy in enumerate(direction_copies):
+        st.markdown(f"---\n### Direction {i+1}: {copy['direction']}")
+        st.markdown("**Setup Lines:**")
+        for line in copy["setup_lines"]:
+            st.write(f"- {line}")
+        st.markdown("**Manifesto:**")
+        st.write(copy["manifesto"])
+        st.markdown("**Headline Set:**")
+        for hl in copy["headline_set"]:
+            st.write(f"- {hl}")
+
+    if st.button("Confirm & Finish", key="confirm_finish"):
+        # This is where you could implement download, save to DB, or show a summary page
+        st.success("Congratulations! Your brand platform is complete.")
+        # Optionally reset or download options here
+        st.balloons()
+        # Reset state for a new session if you want
+        # st.session_state.clear()
+    if st.button("Redo", key="redo_step_5"):
+        st.session_state.step_outputs.pop("step_4", None)
+        st.session_state.selections.pop("step_3", None)
+        st.session_state.step = 5
         # st.experimental_rerun()
