@@ -10,6 +10,10 @@ from utils.prompts import (
 from utils.file_utils import read_file
 from utils.openai_utils import generate_step_output
 import json
+import os
+
+DEFAULT_FILE_PATH = "Brand Inputs Master.txt"
+
 
 # ---------- State Initialization ----------
 if "step" not in st.session_state:
@@ -36,19 +40,27 @@ if st.session_state.step == 1:
     uploaded_file = st.file_uploader("Upload Document (PDF, DOCX, TXT)", type=["pdf", "docx", "txt"])
 
     if st.button("Next"):
-        if not brand_name or not uploaded_file:
+        if not brand_name:
             st.error("Please fill in the Brand Name and upload a document.")
         else:
-            file_text = read_file(uploaded_file)
+            if not uploaded_file:
+                if os.path.exists(DEFAULT_FILE_PATH):
+                    with open(DEFAULT_FILE_PATH, "r", encoding="utf-8") as f:
+                        st.session_state.step_inputs["file_text"] = f.read()
+                    # st.info("No file uploaded. Using local default file.")
+                else:
+                    st.error(f"Please upload a document or make sure '{DEFAULT_FILE_PATH}' exists.")
+                    st.stop()
+            else:
+                st.session_state.step_inputs["file_text"] = read_file(uploaded_file)
             st.session_state.step_inputs["brand_name"] = brand_name
             st.session_state.step_inputs["brand_desc"] = brand_desc
-            st.session_state.step_inputs["file_text"] = file_text
 
             st.session_state.messages = [
                 {"role": "system", "content": system_prompt},
                 {"role": "user", "content": step_1_master_prompt},
                 {"role": "user", "content": f"brand name: {brand_name}\nbrand_desc: {brand_desc}"},
-                {"role": "user", "content": f"The content of the uploaded file: {file_text}"},
+                {"role": "user", "content": f"The content of the uploaded file: {st.session_state.step_inputs['file_text']}"},
             ]
             step_1_output = generate_step_output(st.session_state.messages)
             st.session_state.messages.append({
