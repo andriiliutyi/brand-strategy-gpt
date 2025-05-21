@@ -8,7 +8,7 @@ from utils.prompts import (
     step_5_master_prompt,
 )
 from utils.file_utils import read_file
-from utils.openai_utils import generate_step_output
+from utils.openai_utils import generate_step_output, generate_pdf_unicode
 import json
 import os
 
@@ -69,6 +69,7 @@ if st.session_state.step == 1:
             })
             st.session_state.step_outputs["step_1"] = step_1_output
             st.session_state.step += 1
+            st.rerun()
                 
 # ---------- STEP 2 SELECTION ----------
 # while st.session_state.step == 2:
@@ -508,33 +509,87 @@ if st.session_state.step == 5:
 if st.session_state.step == 6:
     st.header("Step 6: Review Creative Copy for Selected Directions")
     try:
-        data = json.loads(st.session_state.step_outputs["step_5"])  # step_5 output is from the prompt 6
+        data = json.loads(st.session_state.step_outputs["step_5"])
     except Exception as e:
         st.error(f"Could not parse output as JSON: {e}")
         st.text_area("Raw Output", value=st.session_state.step_outputs["step_5"])
         st.stop()
 
     direction_copies = data["direction_copies"]
-    st.markdown("#### Review the creative copy explorations for each direction you selected.")
 
+    st.markdown(
+        "#### Click on each block below to review full details, then select your favorite direction at the bottom."
+    )
+
+    # Prepare a list of short titles for the radio options
+    direction_titles = [
+        f"{copy['direction'][:60]}{'...' if len(copy['direction'])>60 else ''} (#{i+1})"
+        for i, copy in enumerate(direction_copies)
+    ]
+
+    # Show each direction in an expander with rich content
     for i, copy in enumerate(direction_copies):
-        st.markdown(f"---\n### Direction {i+1}: {copy['direction']}")
-        st.markdown("**Setup Lines:**")
-        for line in copy["setup_lines"]:
-            st.write(f"- {line}")
-        st.markdown("**Manifesto:**")
-        st.write(copy["manifesto"])
-        st.markdown("**Headline Set:**")
-        for hl in copy["headline_set"]:
-            st.write(f"- {hl}")
+        with st.expander(f"Direction #{i+1}: {copy['direction'][:60]}{'...' if len(copy['direction'])>60 else ''}", expanded=False):
+            st.markdown(f"**Direction Statement:** {copy['direction']}")
+            st.markdown(f"**Manifesto:**<br><span style='font-size:1.1em;color:#555'>{copy['manifesto'][:350]}{'...' if len(copy['manifesto'])>350 else ''}</span>", unsafe_allow_html=True)
+            st.markdown(f"**Key Words:** {', '.join(copy['headline_set'][:7])}...")
+            st.markdown("**Sample Headline Set:**")
+            st.write("\n".join(f"- {hl}" for hl in copy['headline_set'][:3]))
+            st.markdown("<hr>", unsafe_allow_html=True)
 
-    if st.button("Confirm & Finish", key="confirm_finish"):
-        # This is where you could implement download, save to DB, or show a summary page
-        st.success("Congratulations! Your brand platform is complete.")
-        # Optionally reset or download options here
-        st.balloons()
-        # Reset state for a new session if you want
-        # st.session_state.clear()
+    # User selects final direction with radio
+    selected_idx = st.radio(
+        "Pick your final direction:",
+        options=list(range(len(direction_copies))),
+        format_func=lambda i: direction_titles[i],
+        key="final_direction_radio"
+    )
+    selected_copy = direction_copies[selected_idx]
+
+    st.markdown("---")
+    st.markdown(f"**You selected:**")
+    st.success(f"{selected_copy['direction']}")
+
+    if st.button("Next: Export", key="export_brand_data"):
+        # Prepare your payload
+        brand_name = st.session_state.step_inputs.get("brand_name", "")
+        # company_names = st.session_state.selections.get("step_4", {})
+        # company_name = ""
+        # for style in ["strategic_style", "special_wrongness_style", "best_namer_method"]:
+        #     if company_names.get(style):
+        #         company_name = company_names[style][0]['name']
+        #         break
+
+        # selected_copy = st.session_state.selections.get("direction", {})
+        if not selected_copy:
+            st.error("Please select a final direction first.")
+            st.stop()
+
+        payload = {
+            "brand_name": brand_name,
+            # "company_name": company_name,
+            "direction": selected_copy["direction"],
+            "key_words": selected_copy["headline_set"],
+            "manifesto": selected_copy["manifesto"],
+            "language_exploration": selected_copy["headline_set"],
+        }
+        
+        st.markdown("### Download your Brand Strategy PDF")
+
+        pdf_bytes = generate_pdf_unicode(payload)
+
+        st.download_button(
+            label="Download PDF",
+            data=pdf_bytes,
+            file_name="brand_strategy.pdf",
+            mime="application/pdf"
+        )
+        # try:
+        #     result = set_plugin_data("brandData", json.dumps(payload))
+        #     st.success("Figma plugin data updated! Run your Figma plugin to sync the design.")
+        #     st.json(result)
+        # except Exception as e:
+        #     st.error(f"Failed to update Figma: {e}")
     if st.button("Redo", key="redo_step_5"):
         st.session_state.step_inputs["step_6_context"] = f"""
             REDO + EXPAND PROMPT
