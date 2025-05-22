@@ -8,12 +8,13 @@ load_dotenv()
 client = OpenAI(api_key = os.getenv("OPENAI_API_KEY"))
 
 # Function to generate outputs from OpenAI's API
-def generate_step_output(prompt):
+def generate_step_output(prompt, tools=[]):
     
     response = client.responses.create(
         model = "o4-mini",
         reasoning = {"effort": "medium"},
         input = prompt,
+        tools = tools,
     )
     
     print("Result:\n")
