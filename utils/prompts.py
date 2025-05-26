@@ -527,3 +527,14 @@ Return your answer as valid JSON in the following format:
 Return ONLY valid JSON, no markdown, no explanation, and nothing else.
 
 """
+
+def get_default_prompt_for_step(step):
+    prompts = {
+        0: system_prompt,
+        1: step_1_master_prompt,
+        2: step_2_master_prompt,
+        3: step_3_master_prompt,
+        4: step_4_master_prompt,
+        5: step_5_master_prompt,
+    }
+    return prompts.get(step, "")

@@ -9,13 +9,19 @@ client = OpenAI(api_key = os.getenv("OPENAI_API_KEY"))
 
 # Function to generate outputs from OpenAI's API
 def generate_step_output(prompt, tools=[]):
-    
-    response = client.responses.create(
-        model = "o4-mini",
-        reasoning = {"effort": "medium"},
-        input = prompt,
-        tools = tools,
-    )
+    if (tools is None or len(tools) == 0):
+        response = client.responses.create(
+            model = "o4-mini",
+            reasoning = {"effort": "medium"},
+            input = prompt,
+        )
+    else:
+        response = client.responses.create(
+            model = "o4-mini",
+            reasoning = {"effort": "medium"},
+            input = prompt,
+            # tools = tools,
+        )
     
     print("Result:\n")
     print(response.output_text + "\n")
