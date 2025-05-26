@@ -2,18 +2,37 @@ import streamlit as st
 from utils.prompts import (
     system_prompt,
     step_1_master_prompt,
-    step_2_master_prompt,
-    step_3_master_prompt,
-    step_4_master_prompt,
-    step_5_master_prompt,
     get_default_prompt_for_step
 )
 from utils.file_utils import read_file
 from utils.openai_utils import generate_step_output
 import json
 import os
+import html
 
 DEFAULT_FILE_PATH = "Brand Inputs Master.txt"
+
+def selections_to_html(selections):
+    html_sections = []
+    for step_key, step_data in selections.items():
+        html_sections.append(f"<h2>{html.escape(step_key.replace('_', ' ').title())}</h2>")
+        if isinstance(step_data, dict):
+            html_sections.append("<ul>")
+            for k, v in step_data.items():
+                html_sections.append(f"<li><b>{html.escape(str(k))}:</b> {html.escape(str(v))}</li>")
+            html_sections.append("</ul>")
+        elif isinstance(step_data, list):
+            for i, item in enumerate(step_data):
+                html_sections.append(f"<h3>Option {i+1}</h3><ul>")
+                if isinstance(item, dict):
+                    for k, v in item.items():
+                        html_sections.append(f"<li><b>{html.escape(str(k))}:</b> {html.escape(str(v))}</li>")
+                else:
+                    html_sections.append(f"<li>{html.escape(str(item))}</li>")
+                html_sections.append("</ul>")
+        else:
+            html_sections.append(f"<p>{html.escape(str(step_data))}</p>")
+    return "\n".join(html_sections)
 
 # Helper to create unique keys for Streamlit
 def make_key(field, idx):
@@ -624,15 +643,37 @@ if st.session_state.step == 6:
                 "manifesto": manifesto_val,
                 "headline_set": [line.strip() for line in headline_set_val.split("\n") if line.strip()]
             })
-
-    if st.button("Confirm & Finish", key="confirm_finish"):
+            
+    if st.button("Export Selections as HTML", key="confirm_finish"):
         if not selected_creative_copies:
             st.warning("Please select at least one Creative Copy to confirm!")
             st.stop()
         st.session_state.selections["step_6"] = selected_creative_copies
+        html_content = f"""
+        <html>
+            <head>
+                <meta charset="utf-8">
+                <title>Brand Strategy Selections</title>
+                <style>
+                    body {{ font-family: Arial, sans-serif; margin: 40px; }}
+                    h2 {{ color: #007bfc; }}
+                    ul {{ margin-bottom: 20px; }}
+                    li {{ margin-bottom: 8px; }}
+                </style>
+            </head>
+            <body>
+                <h1>Brand Strategy Selections</h1>
+                {selections_to_html(st.session_state.selections)}
+            </body>
+        </html>
+        """
+        st.download_button(
+            label="Download as HTML",
+            data=html_content,
+            file_name="brand_strategy_selections.html",
+            mime="text/html"
+        )
         st.success("Congratulations! Your brand platform is complete.")
-        st.balloons()
-        # Optionally, reset state or allow download here
 
     if st.button("Redo", key="redo_step_5"):
         st.session_state.step_inputs["step_6_context"] = f"""
